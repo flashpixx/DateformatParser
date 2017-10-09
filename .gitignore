@@ -1,0 +1,12 @@
+*.*
+!.gitignore
+!SConstruct
+!*.md
+!*.doxyfile
+!*.c*
+!*.h*
+!*.g4
+
+runtime/**
+cmake-build-debug/**
+cmake-build-release/**
