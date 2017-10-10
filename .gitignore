@@ -8,5 +8,6 @@
 !*.g4
 
 runtime/**
+!runtime/.hidden
 cmake-build-debug/**
 cmake-build-release/**
