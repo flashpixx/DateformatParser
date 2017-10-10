@@ -126,6 +126,6 @@ env.Alias( "test", [test, lib] );
 env.Alias( "package", zip )
 env.Alias( "documentation", documentation )
 
-env.Clean( zip, [ "documentation", ".sconsign.dblite" ] )
+env.Clean( [zip, test, lib, documentation], [ "documentation", ".sconsign.dblite" ] + GlobRekursiv("src", ".tokens" ) )
 
 # ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
