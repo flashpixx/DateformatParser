@@ -65,17 +65,17 @@ typedef struct DateFormat
     /**
      * parsing successful
      */
-    const bool parsesuccessful;
+    const bool parsesuccessfully;
 
     /**
      * start date
      */
-    const DateType start;
+    const struct DateType start;
 
     /**
      * end date
      */
-    const DateType end;
+    const struct DateType end;
 
 } DateFormat;
 
@@ -88,9 +88,9 @@ typedef struct DateFormat
  *
  * @param p_char date format string
  * @param p_now now definition
- * @return date format
+ * @return date format (must be freed extern)
  */
-DLLEXPORT void parsedateformat( char* p_char, const DateType* p_now );
+DLLEXPORT DateFormat* parsedateformat( char* p_char, const DateType* p_now );
 
 
 #ifdef __cplusplus

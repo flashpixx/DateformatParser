@@ -19,6 +19,13 @@ class ASTExecution : public DateformatBaseListener
          */
         ASTExecution( const std::string& p_input, const DateType* p_now );
 
+        /**
+         * returns resulted date format
+         *
+         * @return date format poinzter (must be freed extern)
+         */
+        DateFormat* get();
+
         void enterDateunit( DateformatParser::DateunitContext* context ) override;
 
         void enterSign( DateformatParser::SignContext* context ) override;

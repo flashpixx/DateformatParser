@@ -20,6 +20,19 @@ ASTExecution::ASTExecution( const std::string& p_input, const DateType* p_now ) 
 }
 
 
+DateFormat* ASTExecution::get()
+{
+    // build result struct on stack
+    DateFormat l_result = { false, { 0,0,0, 0,0 }, { 0,0,0, 0,0 } };
+
+
+    // copy stack to heap C-like
+    auto* l_copy = static_cast<DateFormat*>( std::malloc( sizeof( DateFormat ) ) );
+    std::memcmp( l_copy, &l_result, sizeof( DateFormat ) );
+    return l_copy;
+}
+
+
 void ASTExecution::enterDateunit( DateformatParser::DateunitContext* p_context )
 {
     std::cout << "found dateunit " << p_context->getText() << std::endl;
