@@ -24,7 +24,7 @@ class ASTListener : public DateformatBaseListener
         /**
          * returns resulted date format
          *
-         * @return date format poinzter (must be freed extern)
+         * @return date format pointer (must be freed extern)
          */
         DateFormat* get();
 
