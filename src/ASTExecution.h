@@ -14,7 +14,7 @@ class ASTExecution : public DateformatBaseListener
     public :
 
         /**
-         * parsing call
+         * ctor with parsing call
          *
          * @param p_input input string
          * @param p_now now definition

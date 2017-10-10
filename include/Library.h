@@ -1,7 +1,6 @@
 #pragma once
 
 
-
 #ifdef _WIN32
 /** exporting flag for DLL functions on Windows systems **/
 #define DLLEXPORT _declspec(dllexport)
@@ -19,13 +18,14 @@
 #endif
 
 
-
 #ifdef __cplusplus
 extern "C" {
 #endif
 
+
 #include <unitypes.h>
 #include <stdbool.h>
+
 
 /**
  * struct of date definition
@@ -80,9 +80,6 @@ typedef struct DateFormat
 } DateFormat;
 
 
-
-
-
 /**
  * parsing dateformat
  *
@@ -90,7 +87,7 @@ typedef struct DateFormat
  * @param p_now now definition
  * @return date format (must be freed extern)
  */
-DLLEXPORT DateFormat* parsedateformat( char* p_char, const DateType* p_now );
+DLLEXPORT DateFormat* parsedateformat( const char* p_char, const DateType* p_now );
 
 
 #ifdef __cplusplus

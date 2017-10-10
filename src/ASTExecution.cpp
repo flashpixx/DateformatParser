@@ -4,15 +4,15 @@
 #include "grammar/DateformatParser.h"
 #include "ASTExecution.h"
 #include "ASTErrorListener.h"
+#include "Common.h"
 
 
 ASTExecution::ASTExecution( const std::string& p_input, const DateType* p_now ) :
     m_now( p_now ),
     m_parsesuccessfully( false )
 {
-    assert( m_now );
-
-    std::cout << "parsing: " << p_input << std::endl;
+    ASSERT( m_now, "date pointer is null" );
+    LOG( "parsing: %s", p_input.c_str() );
 
     // build AntLR specific input stream of the input and set error listener
     ASTErrorListener l_error;
@@ -54,28 +54,28 @@ DateFormat* ASTExecution::get()
 
 void ASTExecution::enterDateunit( DateformatParser::DateunitContext* p_context )
 {
-    std::cout << "found dateunit " << p_context->getText() << std::endl;
+    LOG( "found dateunit %s", p_context->getText().c_str() )
 }
 
 
 void ASTExecution::enterSign( DateformatParser::SignContext* p_context )
 {
-    std::cout << "found sign " << p_context->getText() << std::endl;
+    LOG( "found sign %s", p_context->getText().c_str() )
 }
 
 
 void ASTExecution::enterNow( DateformatParser::NowContext* p_context )
 {
-    std::cout << "found now " << p_context->getText() << std::endl;
+    LOG( "found now %s", p_context->getText().c_str() )
 }
 
 
 void ASTExecution::enterDateelement( DateformatParser::DateelementContext* p_context )
 {
-    std::cout << "found date element " << p_context->getText() << std::endl;
+    LOG( "found date element %s", p_context->getText().c_str() )
 }
 
 void ASTExecution::enterNumber( DateformatParser::NumberContext* p_context )
 {
-    std::cout << "found number " << std::stoi( p_context->getText() ) << std::endl;
+    LOG( "found number %u", std::stoi( p_context->getText() ) )
 }
