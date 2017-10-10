@@ -35,27 +35,27 @@ typedef struct DateType
     /**
      * year definition
      */
-    const uint32_t year;
+    const uint16_t year;
 
     /**
      * month definition
      */
-    const uint32_t month;
+    const uint8_t month;
 
     /**
      * day definition
      */
-    const uint32_t day;
+    const uint8_t day;
 
     /**
      * hour
      */
-    const uint32_t hour;
+    const uint8_t hour;
 
     /**
      * minute
      */
-    const uint32_t minute;
+    const uint8_t minute;
 
 } DateType;
 

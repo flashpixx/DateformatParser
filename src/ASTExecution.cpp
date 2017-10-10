@@ -47,13 +47,8 @@ ASTExecution::ASTExecution( const std::string& p_input, const DateType* p_now ) 
 
 DateFormat* ASTExecution::get()
 {
-    // build result struct on stack
-    DateFormat l_result = { m_parsesuccessfully, { 0,0,0, 0,0 }, { 0,0,0, 0,0 } };
-
-    // copy C-like stack element to heap
-    auto* l_copy = static_cast<DateFormat*>( std::malloc( sizeof( DateFormat ) ) );
-    std::memcmp( l_copy, &l_result, sizeof( DateFormat ) );
-    return l_copy;
+    // build result struct on help with data
+    return new DateFormat{ m_parsesuccessfully, { 0,0,0, 0,0 }, { 0,0,0, 0,0 } };
 }
 
 
