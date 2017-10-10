@@ -3,6 +3,10 @@
 
 #include <ANTLRErrorListener.h>
 
+
+/**
+ * error listener for catching lexer and parser errors
+ */
 class ASTErrorListener : public antlr4::ANTLRErrorListener
 {
     public:
