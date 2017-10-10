@@ -26,7 +26,7 @@ DateFormat* ASTExecution::get()
     DateFormat l_result = { false, { 0,0,0, 0,0 }, { 0,0,0, 0,0 } };
 
 
-    // copy stack to heap C-like
+    // copy C-like stack element to heap
     auto* l_copy = static_cast<DateFormat*>( std::malloc( sizeof( DateFormat ) ) );
     std::memcmp( l_copy, &l_result, sizeof( DateFormat ) );
     return l_copy;

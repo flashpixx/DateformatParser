@@ -70,12 +70,12 @@ typedef struct DateFormat
     /**
      * start date
      */
-    const struct DateType start;
+    const DateType start;
 
     /**
      * end date
      */
-    const struct DateType end;
+    const DateType end;
 
 } DateFormat;
 
