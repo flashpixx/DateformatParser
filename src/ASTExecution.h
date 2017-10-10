@@ -43,5 +43,9 @@ class ASTExecution : public DateformatBaseListener
          * pointer of now definition
          */
         const DateType* m_now;
+        /**
+         * parsing successfully flag
+         */
+        bool m_parsesuccessfully;
 
 };
