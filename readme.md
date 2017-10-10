@@ -10,5 +10,7 @@
 ```bash
 java -jar antlr-<your version>-complete.jar -Dlanguage=Cpp grammer/DateFormat.g4 -o src/
 ```
-3. run ```scons``` for building, if you want to prefere a (static) build-in AntLR runtime, remove the DLL library
+3. run ```scons``` for building
+    * see ```SConstruct``` header for build targets and build parameter
+    * if you want to prefere a (static) build-in AntLR runtime, remove the DLL library
 from the directory ```runtime/lib```

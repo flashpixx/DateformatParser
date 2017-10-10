@@ -6,6 +6,13 @@ import platform, os
 # type = static|dynamic     : library build type (default: dynamic)
 # debug = Yes|No            : debug version (default: False )
 # arc   = x68|x64           : bit definition 32 or 64 bit version (default: x64)
+#
+#
+# build targets
+#
+# test                      : build test program
+# documentation             : build documentation with doxygen
+# package                   : build zip package with documentation, header and library
 
 
 # library name
