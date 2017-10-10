@@ -23,8 +23,13 @@ extern "C" {
 #endif
 
 
-#include <unitypes.h>
+
 #include <stdbool.h>
+#if defined(_WIN32) || defined(_WIN64)
+#include <inttypes.h>
+#else
+#include <unitypes.h>
+#endif
 
 
 /**

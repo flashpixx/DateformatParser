@@ -5,7 +5,7 @@ import platform, os
 #
 # type = static|dynamic     : library build type (default: dynamic)
 # debug = Yes|No            : debug version (default: False )
-# arc   = x68|x64           : bit definition 32 or 64 bit version (default: x86)
+# arc   = x68|x64           : bit definition 32 or 64 bit version (default: x64)
 
 
 # library name
@@ -57,11 +57,11 @@ vars = Variables()
 vars.Add( EnumVariable( "type", "static or dynamic library type", "dynamic", allowed_values=("dynamic", "static"), ignorecase=True ) )
 vars.Add( BoolVariable( "debug", "debugging flag", False ) )                            
 
-env = Environment( ARCH_TYPE = ARGUMENTS.get("arch", "x86"), variables=vars )
+env = Environment( ARCH_TYPE = ARGUMENTS.get("arch", "x64"), variables=vars )
 
 
 # platform specific configuration (compiler, linker flags)
-env.AppendUnique(CPPPATH = ["runtime/antlr4-runtime"])
+env.AppendUnique(CPPPATH = [os.path.join("runtime","antlr4-runtime")])
 env.AppendUnique(LIBS = ["antlr4-runtime"])
 
 if platform.system().lower() == "posix" or platform.system().lower() == "linux" :
@@ -79,10 +79,12 @@ elif platform.system().lower() == "darwin" :
 elif "windows" in platform.system().lower() :
     env.AppendUnique(CDEFINES = [])
     env.AppendUnique(CFLAGS   = ["/Wall", "/O2", "/GR", "/EHsc", "/nologo"])
-    env.AppendUnique(LIBPATH   = [])
+    env.AppendUnique(CPPFLAGS = ["/Wall", "/O2", "/EHsc", "/nologo"])
+    env.AppendUnique(LIBPATH   = [os.path.join("runtime", "lib", VisualStudio(), env["ARCH_TYPE"], "Release DLL")])
    
 if not env["debug"] :
     env.AppendUnique(CPPDEFINES = ["NDEBUG"])
+    env.AppendUnique(CDEFINES = ["NDEBUG"])
 
 print
 print
@@ -106,15 +108,17 @@ documentation = env.Command("documentation", "documentation.doxyfile", "doxygen 
 zip = env.Zip( 
     "_".join( [ LibraryName(), platform.system(), env["ARCH_TYPE"], env["type"], "debug" if env["debug"] else "release" ] ).lower(), 
     lib + GlobRekursiv("include", [".h", ".hpp"] ) + documentation
-)    
+) 
 
-# define clean-up
+# test
+test = Program( "testparser", os.path.join("test","testparser.c"), LIBS=[LibraryName()], LIBPATH=["."], CFLAGS=env["CFLAGS"] )
+
+# define targets
+env.Default( lib );
+env.Alias( "test", [test, lib] );
+env.Alias( "package", zip )
+env.Alias( "documentation", documentation )
+
 env.Clean( zip, [ "documentation", ".sconsign.dblite" ] )
 
 # ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-
-# --- test target ------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-env.Alias( "test", Program( "testparser", os.path.join("test","testparser.c"), LIBS=["dateformat"], LIBPATH=["."], CFLAGS=env["CFLAGS"] ) );
-
