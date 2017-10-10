@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include "../include/Library.h"
 #include "grammar/DateformatBaseListener.h"
 
 /**
@@ -14,8 +15,9 @@ class ASTExecution : public DateformatBaseListener
          * parsing call
          *
          * @param p_input input string
+         * @param p_now now definition
          */
-        void parse( const std::string& p_input );
+        ASTExecution( const std::string& p_input, const DateType* p_now );
 
         void enterDateunit( DateformatParser::DateunitContext* context ) override;
 
@@ -26,5 +28,13 @@ class ASTExecution : public DateformatBaseListener
         void enterDateelement( DateformatParser::DateelementContext* context ) override;
 
         void enterNumber( DateformatParser::NumberContext* context ) override;
+
+
+    private :
+
+        /**
+         * pointer of now definition
+         */
+        const DateType* m_now;
 
 };

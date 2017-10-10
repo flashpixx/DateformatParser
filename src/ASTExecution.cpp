@@ -1,11 +1,14 @@
+#include <cassert>
 #include "antlr4-runtime.h"
 #include "grammar/DateformatLexer.h"
 #include "grammar/DateformatParser.h"
 #include "ASTExecution.h"
 
-
-void ASTExecution::parse( const std::string& p_input )
+ASTExecution::ASTExecution( const std::string& p_input, const DateType* p_now ) :
+    m_now( p_now )
 {
+    assert( m_now );
+
     std::cout << "parsing: " << p_input << std::endl;
 
     antlr4::ANTLRInputStream l_input( p_input );
@@ -44,4 +47,3 @@ void ASTExecution::enterNumber( DateformatParser::NumberContext* p_context )
 {
     std::cout << "found number " << std::stoi( p_context->getText() ) << std::endl;
 }
-

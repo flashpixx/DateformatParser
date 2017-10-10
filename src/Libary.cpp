@@ -1,16 +1,8 @@
 #include "ASTExecution.h"
+#include "../include/Library.h"
 
-extern "C" {
-    #include "../include/Library.h"
-}
 
-/**
- * parse string
- *
- * @param p_char date format string
- */
-void parsedateformat( char* p_char )
+void parsedateformat( char* p_char, const DateType* p_now )
 {
-    ASTExecution l_execute;
-    l_execute.parse( std::string( p_char ) );
+    ASTExecution l_execute( std::string( p_char ), p_now );
 }

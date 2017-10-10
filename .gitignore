@@ -9,5 +9,7 @@
 
 runtime/**
 !runtime/.hidden
+documentation/**
 cmake-build-debug/**
 cmake-build-release/**
+testparser

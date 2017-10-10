@@ -12,6 +12,10 @@ import platform, os
 def LibraryName() :
     return "dateformat"
 
+# ms visual studio version
+def VisualStudio() :
+    return "vs-2015"
+
 
 # --- helper function ------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -58,7 +62,6 @@ env = Environment( ARCH_TYPE = ARGUMENTS.get("arch", "x86"), variables=vars )
 
 # platform specific configuration (compiler, linker flags)
 env.AppendUnique(CPPPATH = ["runtime/antlr4-runtime"])
-env.AppendUnique(LIBPATH = ["runtime/lib"])
 env.AppendUnique(LIBS = ["antlr4-runtime"])
 
 if platform.system().lower() == "posix" or platform.system().lower() == "linux" :
@@ -71,10 +74,12 @@ elif platform.system().lower() == "darwin" :
     env.AppendUnique(CFLAGS    = ["-Wall", "-O2", "-std=c11"])
     env.AppendUnique(CPPFLAGS  = ["-Wall", "-O2", "-std=c++11"])
     env.AppendUnique(LINKFLAGS = ["-Wl,-install_name," + env["LIBPREFIX"] + LibraryName() + env["SHLIBSUFFIX"]])
+    env.AppendUnique(LIBPATH   = [os.path.join("runtime", "lib")])
 
 elif "windows" in platform.system().lower() :
     env.AppendUnique(CDEFINES = [])
     env.AppendUnique(CFLAGS   = ["/Wall", "/O2", "/GR", "/EHsc", "/nologo"])
+    env.AppendUnique(LIBPATH   = [])
    
 if not env["debug"] :
     env.AppendUnique(CPPDEFINES = ["NDEBUG"])
@@ -111,5 +116,5 @@ env.Clean( zip, [ "documentation", ".sconsign.dblite" ] )
 
 # --- test target ------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-env.Alias( "test", Program( "testparser", "test/testparser.c", LIBS=["dateformat"], LIBPATH=["."] ) );
+env.Alias( "test", Program( "testparser", os.path.join("test","testparser.c"), LIBS=["dateformat"], LIBPATH=["."], CFLAGS=env["CFLAGS"] ) );
 

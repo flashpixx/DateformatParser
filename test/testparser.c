@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "../include/Library.h"
 
 /**
@@ -10,11 +11,20 @@
  */
 int main( int p_argc, char* p_argv[] )
 {
-    parsedateformat( "q5" );
+
+    const DateType l_now = { 2014, 03, 01, 12, 00 };
+
+
+    parsedateformat( "q5", &l_now );
+
     printf( "\n\n" );
 
-    parsedateformat( "t+3q#2" );
+
+    parsedateformat( "t+3q#2", &l_now );
+
     printf( "\n\n" );
 
-    parsedateformat( "y2000xy" );
+
+    parsedateformat( "y2000xy", &l_now );
+
 }

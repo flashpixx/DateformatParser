@@ -1,5 +1,7 @@
 #pragma once
 
+
+
 #ifdef _WIN32
 /** exporting flag for DLL functions on Windows systems **/
 #define DLLEXPORT _declspec(dllexport)
@@ -16,9 +18,81 @@
 #endif
 #endif
 
+
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#include <unitypes.h>
+#include <stdbool.h>
+
+/**
+ * struct of date definition
+ */
+typedef struct DateType
+{
+    /**
+     * year definition
+     */
+    const uint32_t year;
+
+    /**
+     * month definition
+     */
+    const uint32_t month;
+
+    /**
+     * day definition
+     */
+    const uint32_t day;
+
+    /**
+     * hour
+     */
+    const uint32_t hour;
+
+    /**
+     * minute
+     */
+    const uint32_t minute;
+
+} DateType;
+
+
+typedef struct DateFormat
+{
+    /**
+     * parsing successful
+     */
+    const bool parsesuccessful;
+
+    /**
+     * start date
+     */
+    const DateType start;
+
+    /**
+     * end date
+     */
+    const DateType end;
+
+} DateFormat;
+
+
+
+
+
 /**
  * parsing dateformat
  *
- * @param date string
+ * @param p_char date format string
+ * @param p_now now definition
+ * @return date format
  */
-DLLEXPORT void parsedateformat( char* );
+DLLEXPORT void parsedateformat( char* p_char, const DateType* p_now );
+
+
+#ifdef __cplusplus
+}
+#endif
