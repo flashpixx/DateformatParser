@@ -2,14 +2,14 @@
 
 
 #include <string>
-#include "../include/Library.h"
+#include "../include/Dateformat.h"
 #include "grammar/DateformatBaseListener.h"
 
 
 /**
  * abstract syntax tree class
  */
-class ASTExecution : public DateformatBaseListener
+class ASTListener : public DateformatBaseListener
 {
     public :
 
@@ -19,7 +19,7 @@ class ASTExecution : public DateformatBaseListener
          * @param p_input input string
          * @param p_now now definition
          */
-        ASTExecution( const std::string& p_input, const DateType* p_now );
+        ASTListener( const std::string& p_input, const DateType* p_now );
 
         /**
          * returns resulted date format

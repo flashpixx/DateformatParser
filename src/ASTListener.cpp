@@ -2,12 +2,12 @@
 #include "antlr4-runtime.h"
 #include "grammar/DateformatLexer.h"
 #include "grammar/DateformatParser.h"
-#include "ASTExecution.h"
+#include "ASTListener.h"
 #include "ASTErrorListener.h"
 #include "Common.h"
 
 
-ASTExecution::ASTExecution( const std::string& p_input, const DateType* p_now ) :
+ASTListener::ASTListener( const std::string& p_input, const DateType* p_now ) :
     m_now( p_now ),
     m_parsesuccessfully( false )
 {
@@ -45,37 +45,37 @@ ASTExecution::ASTExecution( const std::string& p_input, const DateType* p_now ) 
 }
 
 
-DateFormat* ASTExecution::get()
+DateFormat* ASTListener::get()
 {
     // build result struct on help with data
     return new DateFormat{ m_parsesuccessfully, { 0,0,0, 0,0 }, { 0,0,0, 0,0 } };
 }
 
 
-void ASTExecution::enterDateunit( DateformatParser::DateunitContext* p_context )
+void ASTListener::enterDateunit( DateformatParser::DateunitContext* p_context )
 {
     LOG( "found dateunit %s", p_context->getText().c_str() )
 }
 
 
-void ASTExecution::enterSign( DateformatParser::SignContext* p_context )
+void ASTListener::enterSign( DateformatParser::SignContext* p_context )
 {
     LOG( "found sign %s", p_context->getText().c_str() )
 }
 
 
-void ASTExecution::enterNow( DateformatParser::NowContext* p_context )
+void ASTListener::enterNow( DateformatParser::NowContext* p_context )
 {
     LOG( "found now %s", p_context->getText().c_str() )
 }
 
 
-void ASTExecution::enterDateelement( DateformatParser::DateelementContext* p_context )
+void ASTListener::enterDateelement( DateformatParser::DateelementContext* p_context )
 {
     LOG( "found date element %s", p_context->getText().c_str() )
 }
 
-void ASTExecution::enterNumber( DateformatParser::NumberContext* p_context )
+void ASTListener::enterNumber( DateformatParser::NumberContext* p_context )
 {
     LOG( "found number %u", std::stoi( p_context->getText() ) )
 }
