@@ -11,11 +11,19 @@ ASTExecution::ASTExecution( const std::string& p_input, const DateType* p_now ) 
 
     std::cout << "parsing: " << p_input << std::endl;
 
+    // build AntLR specific input stream of the input string
     antlr4::ANTLRInputStream l_input( p_input );
+
+    // create lexer and tocken stream for parser
     DateformatLexer l_lexer( &l_input );
     antlr4::CommonTokenStream l_token( &l_lexer );
+
+    // create parser
     DateformatParser l_parser( &l_token );
+
+    // get top-level grammer rule as node in the parsing tree
     antlr4::tree::ParseTree* l_tree = l_parser.main();
+    // start parsing process
     antlr4::tree::ParseTreeWalker::DEFAULT.walk( this, l_tree );
 }
 
