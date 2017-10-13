@@ -9,7 +9,9 @@
  * @todo for storing datunit objects, use a std::map in the ASTListener with an own comparator -> a good idea
  * for a unique key is an enum DAY, WEEK... -> create a suitable datatype for that
  * @todo think which data must be stored within a DateUnit object to do a calculation between two DateUnit objects
- * @todo think about how a set of DateUnit objects should be aggrgated to build the final value, take a look on C++11 Lambda Expression (http://de.cppreference.com/w/cpp/language/lambda) and C++ Operator overloading
+ * @todo think about how a set of DateUnit objects should be aggrgated to build the final value, take a look on
+ * C++11 Lambda Expression (http://de.cppreference.com/w/cpp/language/lambda) and C++ Operator overloading ->
+ * this calculation can be done very easily with a stack iif the architectur is clean
  */
 class IDateUnit
 {
