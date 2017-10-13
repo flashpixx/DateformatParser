@@ -11,7 +11,7 @@
  * @todo think which data must be stored within a DateUnit object to do a calculation between two DateUnit objects
  * @todo think about how a set of DateUnit objects should be aggrgated to build the final value, take a look on
  * C++11 Lambda Expression (http://de.cppreference.com/w/cpp/language/lambda) and C++ Operator overloading ->
- * this calculation can be done very easily with a stack iif the architectur is clean
+ * this calculation can be done very easily with a single iteration iif the architectur is clean
  */
 class IDateUnit
 {
