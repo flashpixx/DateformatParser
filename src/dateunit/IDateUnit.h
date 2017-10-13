@@ -12,6 +12,9 @@
  * @todo think about how a set of DateUnit objects should be aggrgated to build the final value, take a look on
  * C++11 Lambda Expression (http://de.cppreference.com/w/cpp/language/lambda) and C++ Operator overloading ->
  * this calculation can be done very easily with a single iteration iif the architectur is clean
+ * @todo think at which position exit/enter method of the listener is a calculation a good structure, think about if a
+ * DateUnit object is existing multiple times, there are multiple possibilities to deal with that, a map is one choice
+ * there exists also a faster solution
  */
 class IDateUnit
 {
